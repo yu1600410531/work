@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,inital-scale=1,maximum-scale=1,user-scalable=no;" />
+<title>无标题文档</title>
+
+
+<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+
+<style type="text/css">
+        hr {
+            border: none;
+            background-color: black;
+            height: 3px;
+        }
+       	#tab{
+            table-layout: fixed;
+            width: 850px;
+            height: 100px;
+            text-align: center;
+        }
+        #sp1{
+            position: relative;
+            left: 139px;
+        }
+        #sp2{
+            position: relative;
+            left: 210px;
+        }
+        #sp3{
+            position: relative;
+            left: 276px;
+        }
+        #sp4{
+            position: relative;
+            left: 450px;
+        }
+        #sp5{
+            position: relative;
+            left: 635px;
+        }
+	.right{ float:right; margin-right: 2px}
+    </style>
+
+
+</head>
+
+<body>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<h2 align="center" style="text-align: center;"> 方寸物造专用缴纳合同</h2>
+<table width="1000" height="633" border="1" align="center" cellpadding="0" cellspacing="0">
+{% for d in data %}
+<h4 style="margin-left:450px">合同编号:20170700{{succ.id}}</h4>
+  <tr>
+    <td width="148" height="50" align="center">品牌名称</td>
+    <td height="50" colspan="2" align="center">{{ d.name }}</td>
+    <td width="128" height="50" align="center">城市</td>
+    <td width="407" height="50" align="center">{{ succ.citty }}</td>
+  </tr>
+  <tr>
+    <td height="50" align="center">联系人</td>
+    <td height="50" colspan="2" align="center">{{ succ.name }}</td>
+    <td height="50" align="center">联系电话</td>
+    <td height="50" align="center">{{ succ.name_phone }}</td>
+  </tr>
+  <tr>
+    <td height="50" align="center">联系邮箱</td>
+    <td height="50" colspan="4" align="left">&nbsp;&nbsp;{{succ.email}}</td>
+  </tr>
+  <tr>
+    <td height="50" align="center">收货地址</td>
+    <td height="50" colspan="4" align="left">&nbsp;&nbsp;{{succ.address}}</td>
+  </tr>
+  <tr>
+    <td height="50" align="center">预存款项</td>
+    <td width="213" height="50" align="center">{% if succ.fangcun == "5000" %}&radic;5000&yen;{%else%}5000&yen;{%endif%}</td>
+    <td width="225" height="50" align="center">{% if succ.fangcun == "10000" %}&radic;10000&yen;{%else%}10000&yen;{%endif%}</td>
+    <td height="50" align="center">{% if succ.fangcun == "20000" %}&radic;20000&yen;{%else%}20000&yen;{%endif%}</td>
+    <td height="50" align="center">{% if succ.fangcun == "5000" %}<p>人民币伍仟元整</p>{%elif succ.fangcun == "10000" %}<p>人民币壹万元整</p>{%elif succ.fangcun == "20000" %}<p>人民币贰万元整</p>{%endif%}</td>
+  </tr>
+
+  <tr>
+    <td height="50" align="center">收款方式</td>
+    <td height="50" colspan="4" align="center">
+      {% if succ.pay == "支付宝" %}
+        <p>&radic;支付宝</p>
+      {% elif succ.pay == "微信" %}
+          &radic;微信
+      {% elif succ.pay == "银行转账" %}
+          &radic;银行转账
+      {% elif succ.pay == "POS刷卡" %}
+          &radic;POS刷卡（借记卡/贷记卡）
+      {%endif%}
+    </td>
+  </tr>
+  <tr>
+    <td height="50" colspan="5" align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;支付宝账户&nbsp;&nbsp;&nbsp;<u>{% if succ.zhifubao == "" %}<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>{%else%} {{succ.zhifubao}}{%endif%}</u> &nbsp;&nbsp;&nbsp;
+
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;微信昵称&nbsp;&nbsp;&nbsp;<u>{% if succ.weixin == "" %}<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>{%else%} {{succ.weixin}}{%endif%}</u> &nbsp;&nbsp;&nbsp;
+
+    卡号后五位&nbsp;&nbsp;&nbsp;{% if succ.kahao == "" %}<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>{%else%}<u>{{ succ.kahao }} </u>{%endif%}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+    开户银行&nbsp;&nbsp;&nbsp;<u>{% if succ.bank == "请选择" %}<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>{%else%}<u>{{ succ.bank }}</u>{%endif%}</u></td>
+  </tr>
+  <tr>
+    <td height="230" colspan="5" align="left" valign="top">说明：<br/>
+
+<span class="glyphicon glyphicon-asterisk">&nbsp;正常制作周期7-10个工作日，特殊情况会延长交付时间</span><br/>
+<span class="glyphicon glyphicon-asterisk">&nbsp;加急：制作周期5个工作日，需收取50%的加急费用</span><br/>
+<span class="glyphicon glyphicon-asterisk">&nbsp;特急：制作周期2个工作日，需收取1倍的加急费用</span><br/>
+<span class="glyphicon glyphicon-asterisk">&nbsp;以上均不包含运输的时间</span><br/>
+
+<br/><span class="glyphicon glyphicon-asterisk">&nbsp;预存会员制：5000元 10000元 20000元 根据自己的情况选择，预存后可享受预存客户价格</span><br/>
+<span class="glyphicon glyphicon-asterisk">&nbsp;方寸有会员预存奖励机制：每次预存或续费20000元返500元到预存账户</span><br/>
+<span class="glyphicon glyphicon-asterisk">&nbsp;预存客户预存款不退；如遇特别情况，需经双方协商一致书面解除合约，已消费部分按2倍重新计费，剩余部分扣除20%违约金；如未曾消费过需要退款的扣除20%违约金。</span><br/>
+<span class="glyphicon glyphicon-asterisk">&nbsp;每次续费前方寸财务会发对账单给您，您也可以随时要求方寸财务发对账单给您。</span><br/>
+<span class="glyphicon glyphicon-asterisk">&nbsp;如您消费完预存金额后不再续费，您最后一笔订单金额大于预存余额50%时，这笔订单将按照非预存客户的价格进行收费。例如：您的订单总额300元，您的余额100元，最后这笔订单按照非预存客户价格收费；您的订单总额200元，您的余额150元，最后这笔订单还是按照预存客户价格您只需要补足50元；</span>
+
+<span class="glyphicon glyphicon-asterisk">&nbsp;如您需要直接把产品邮寄到客户家里，请与订单客服联系沟通确认运费付款方式，我们会收取每个客户10元包装代寄服务费</span>
+</td>
+  </tr>
+  <tr>
+    <td height="75" align="center">收款单位签章</td>
+    <td colspan="2" align="center">&nbsp;</td>
+    <td align="center">收款人签字</td>
+    <td align="center">&nbsp;</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<p style="margin-left:420px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;打印订单时间	{{succ.time}}</p>
+
+<div class="right">我已确认以上信息：<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u></div></div>
+{% endfor %}
+</body>
+</html>

@@ -1,0 +1,172 @@
+﻿{% extends 'port/base.html' %}
+{% load staticfiles %}
+{% block js %}
+    <script type="text/javascript" src="{% static 'js/city.js' %}"></script>
+    <script type="text/javascript">
+
+
+     $(function(){
+      alert('1323');
+            $("#zhifubao").hide();
+            $("#kahao").hide();
+            $("#bank").hide();
+             $("#weixin").hide();
+
+            $("#per").change(function(){
+                var data = $(this).children("option:selected").val();
+                switch(data){
+                  case("支付宝"):
+                     $("#zhifubao").show();
+                     $("#kahao").hide();
+                     $("#bank").hide();
+                      $("#weixin").hide();
+                    break;
+
+                  case("微信"):
+                    $("#zhifubao").hide();
+                    $("#kahao").hide();
+                    $("#bank").hide();
+                     $("#weixin").show();
+                    break;
+
+                  case("银行转账"):
+                    $("#zhifubao").hide();
+                    $("#kahao").show();
+                    $("#bank").show();
+                     $("#weixin").hide();
+                    break;
+
+                  case("刷卡"):
+                    $("#zhifubao").hide();
+                    $("#kahao").show();
+                    $("#bank").show();
+                     $("#weixin").hide();
+                    break;
+
+                  default:
+                    $("#zhifubao").hide();
+                    $("#kahao").hide();
+                    $("#bank").hide();
+                     $("#weixin").hide();
+                }
+            });
+        });
+</script>
+{% endblock %}
+{% block body %}
+    <body onload="setup();preselect('北京市');promptinfo();">
+ {% endblock %}
+
+	{% block title %}方寸物造订单系统{% endblock %}
+
+
+
+
+{% block center %}
+<h1>方寸物造订单系统</h1>
+     <p>请填写下面表单，提交后到收款处缴费。</p>
+  <h1>{{ order }}</h1>
+    {%  for o in order %}
+	<form action="" method="POST" onSubmit="return x(this)">{%csrf_token%}
+	<div class="form-group">	
+		<label>您的品牌名称：</label>
+		<input class="form-control" type="text" name="company" value="{{ o.name }}">
+	</div>
+	<div class="form-inline">
+		<label>所在地区地区：</label><br>
+		<select style="margin-bottom:10px;" class="form-control" name="province" id="s1">
+			<option value=""></option>
+		</select>
+		<select style="margin-bottom:10px;"  class="form-control" name="city" id="s2">
+			<option value=""></option>
+		</select>
+		<select style="margin-bottom:10px;"  class="form-control" name="town" id="s3">
+			<option></option>
+		</select>
+		</div>
+		
+		<div class="form-group">
+		<label>联系人：</label>
+		<input class="form-control"  type="text" name="name" value="{{ o.contact_name }}">
+		</div>
+		<div class="form-group">
+		<label>联系电话：</label>
+		<input class="form-control"  type="text" name="phone" value="{{ o.contact_phone }}">
+		</div>
+		<div class="form-group">	
+		<label>联系邮箱：</label>
+		<input class="form-control"  type="text" name="email" value="{{ o.email }}">
+		</div>
+		<div class="form-group">
+		<label>收货地址：</label>
+		<input class="form-control"  type="text" name="address" value="{{ o.address }}">
+		
+	</div>
+	
+	
+	<div class="form-group">
+		<label>选择本次预存费用：</label>
+			<select class="form-control" name="pay_account">
+				<option value="5000">5000</option>
+				<option value="10000">10000</option>
+				<option value="20000">20000</option>
+			</select>
+		</div>
+<div class="form-group">
+		<label>付款方式：</label>
+		<select  class="form-control"  id="per" name="pay_way">
+			<option value="支付方式">请选择支付方式</option>
+			<option value="支付宝">支付宝</option>
+			<option value="微信">微信</option>
+			<option value="银行转账">银行转账</option>
+			<option value="刷卡">刷卡</option>
+		</select>
+		</div>
+		<div id="zhifubao">
+		<div class="form-group">
+			<label>支付宝账户：</label>
+			<input class="form-control" type="text" name="zhifubao">
+			</div>
+		</div>
+		<div id="weixin">
+		<div class="form-group">
+			<label>微信昵称：</label>
+			<input class="form-control" type="text" name="weixin" value="{{ o.we_chat }}">
+			</div>
+		</div>
+		<div id="kahao">
+		<div class="form-group">
+			<label>卡号后五位：</label>
+			<input class="form-control" type="text" name="kahao">
+		</div>
+		</div>
+		
+		<div id="bank">
+		<div class="form-group">
+			<label>开户银行：</label>
+			<select class="form-control" name="bank1">
+				<option>请选择</option>
+				<option>建设银行</option>
+				<option>农业银行</option>
+				<option>工商银行</option>
+				<option>中国银行</option>
+				<option>招商银行</option>
+				<option>邮政银行</option>
+				<option>交通银行</option>
+				<option>光大银行</option>
+				<option>中信银行</option>
+				<option>民生银行</option>
+				<option>华夏银行</option>
+				<option>浦发银行</option>
+				<option>兴业银行</option>
+
+			</select>
+		</div>
+		</div>
+	
+						<button type="submit" name="submi" class="btn btn-default" >提交订单</button>
+	
+		
+	</form>
+    {% endfor %}
+{% endblock %}

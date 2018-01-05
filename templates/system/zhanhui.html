@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+
+<html lang="zh">
+<head>
+	
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />   
+<meta name="apple-mobile-web-app-capable" content="yes" />    
+<meta name="format-detection" content="telephone=no" />    
+<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+
+
+</head>
+
+<h1>方寸物造订单系统 <small>极致影像 用心匠造</small></h1>
+
+
+<body>
+{#{% if request.user.is_authenticated %}#}
+<br>
+&nbsp;&nbsp成交客户总数:<label class="label label-primary">{{ count }}</label>
+<a href="{% url 'userlogout' %}">退出登录</a>
+	
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>客户ID</th>
+				<th>品牌名称</th>
+				<th>联系人</th>
+				<th>联系电话</th>
+				<th>联系地址</th>
+				<th>支付方式</th>
+				<th>支付费用</th>
+				<th>时间</th>
+				<th>收款状态</th>
+				{% if request.user.username == "aimi" %}
+				<th>确认收款</th>
+				{% endif %}
+			</tr>
+		</thead>
+		<tbody>
+        {% for u in user %}
+			<tr>
+				<td>{{u.pk}}</td>
+				<td><a href="{% url 'order' u.pk %}">{{ u.name }}</a></td>
+				<td><a href="{% url 'order' u.pk %}">{{u.contact_name}}</a></td>
+				<td>{{u.contact_phone}}</td>
+				<td>{{u.address}}</td>
+				<td>{{u.pay_way}}</td>
+				<td>{{u.pay_account}}</td>
+				<td>{{u.time}}</td>
+				<td>{% if u.status == 0%}<span  class="label label-danger">未收款</span>{% else %}<span class="label label-success">已收款</span>{% endif %}</td>
+
+				<td><a href="{% url 'queren' u.pk %}"><input type="submit" value="确认"></a></td>
+                <td><a href="{% url 'hetong' u.pk %}"><span style="color: black">打印合同</span></a> </td>
+
+			</tr>
+		</tbody>{% endfor %}
+	</table>
+</body>
+</html>

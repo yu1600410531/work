@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人中心</title>
+</head>
+<body>
+<h1>当前用户是:{{ user }}账户余额为{{ balance }}</h1>
+{#<form action="" method="post">#}
+{#    <h1>查看历史订单</h1>#}
+{#    页码:<input type="text" name="page" id="page"><br>#}
+{#    订单编号:<input type="text" name="order_code"><br>#}
+{#    每页记录数:<input type="text" name="size">#}
+{#    <input type="submit">#}
+{# </form>#}
+
+<h1>历史订单数据</h1>
+<table border="1">
+    <tr>
+        <td>订单状态</td>
+        <td>订单编号</td>
+        <td>订单日期</td>
+    </tr>
+    {% for d in dict1.sale_orders %}
+        <tr>
+            <td>{{ d.state }}</td>
+            <td>{{ d.code }}</td>
+            <td>{{ d.date_order }}</td>
+        </tr>
+    {% endfor %}
+</table>
+<p>
+<form method="get" action="">
+    请输入查询页码<input type="text" name="page" >
+    <input type="submit" value="查询">
+    <input type="hidden" name="size" value="4">
+</form>
+</p>
+<h1>充值记录数据</h1>
+<table>
+    <tr>
+     <td>充值方式</td>
+        <td>金额</td>
+        <td>日期</td>
+        <td>描述</td>
+    </tr>
+
+{% for pay in pay_data %}
+    <tr>
+        <td>{{ pay.journal }}</td>
+        <td>{{ pay.amount }}</td>
+        <td>{{ pay.payment_date }}</td>
+        <td>{{ pay.payment_type }}</td>
+
+    </tr>
+{% endfor %}
+</table>
+
+</body>
+</html>
